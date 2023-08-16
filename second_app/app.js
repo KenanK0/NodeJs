@@ -28,17 +28,14 @@ const server = http.createServer((req, res) => {
       const parsedBody = Buffer.concat(body).toString();
       console.log(parsedBody);
       const message = parsedBody.split("=")[1];
-      fs.writeFileSync("message.txt", message);
-
-      res.statusCode = 302;
-      res.setHeader("Location", "/");
+      fs.writeFile("message.txt", message, () => {
+        res.statusCode = 302;
+        res.setHeader("Location", "/");
+      });
 
       return res.end();
     });
   }
-
-  res.setHeader("Content-Type", "text/html");
-  res.write("<h1>Hello from Node JS! Kasongo Le bon </h1>");
 
   res.end();
 });
