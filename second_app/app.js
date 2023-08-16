@@ -1,6 +1,6 @@
 const http = require("http");
 const fs = require("fs");
-console.log("bref");
+
 
 const server = http.createServer((req, res) => {
   const url = req.url;
@@ -27,10 +27,10 @@ const server = http.createServer((req, res) => {
     return req.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
       console.log(parsedBody);
-      const message = parsedBody.split("=")[1];
+      const message = parsedBody.split("=")[0];
       fs.writeFile("message.txt", message, () => {
+        // res.setHeader("Location", "/");
         res.statusCode = 302;
-        res.setHeader("Location", "/");
       });
 
       return res.end();
