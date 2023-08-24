@@ -1,15 +1,24 @@
-const http = require("http");
 const express = require("express");
+const bodyParser = require("body-parser");
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
 const app = express();
+const path = require("path");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(shopRoutes);
+
+app.use("/admin", adminRoutes);
 
 app.use((req, res, next) => {
-  console.log("another middleware");
+  res.status(404);
 
-  res.send("<h1 style='background-color:lightblue' >We Love Kenan </h1>");
+  res.sendFile(path.join(__dirname, "views", "404.html"));
+  // res.status(404).send("<h1>404 bro</h1>");
 });
 
-// const server = http.createServer(app);
-
-// server.listen(3000);
-
-app.listen(3000);
+app.listen(3000, () => {
+  console.log("listening on port 3000");
+});
