@@ -43,3 +43,20 @@ main {
 .main-header__item a.active {
     color: #3e00a1;
 }
+
+.kenan{
+
+    border-radius: 9px;
+    padding: 10px;
+    width: 50%;
+    box-shadow: 2px 2px lightgray;
+    background-color: lightblue;
+    transition: 0.5s;
+    font-weight: 300;
+    
+}
+
+.kenan:hover{
+    background-color: lightgreen;
+    box-shadow: 2px 2px black;
+}
